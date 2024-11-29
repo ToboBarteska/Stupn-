@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Převod teplot</title>
+    <style>
+
+        * {
+         box-sizing: border-box;
+        }
+        /* Globální stylování */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Celá výška okna */
+            background: url('https://cdn.cstlnsttc.com/images/upload/articles/1200x744/1e80c5a9f82c8ca3632a055170046af7.jpg') no-repeat center center fixed; /* Obrázek na pozadí */
+            background-size: cover; /* Obrázek pokryje celou plochu */
+        }
+
+        /* Kontejner pro formulář */
+        .container {
+            background: rgba(255, 255, 255, 0.2); /* Bílá barva s průhledností */
+            color: #333;
+            border-radius: 15px; /* Zaoblené rohy */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.2); /* 3D efekt */
+            padding: 30px 20px; /* Vnitřní mezery */
+            width: 350px; /* Šířka formuláře */
+            text-align: center; /* Zarovnání textu na střed */
+            backdrop-filter: blur(5px); /* Rozmazání pozadí pod formulářem (pro moderní vzhled) */
+            -webkit-backdrop-filter: blur(5px); /* Podpora pro Safari */
+        }
+
+        /* Nadpis */
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Styl pro vstupní pole */
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1); /* 3D efekt uvnitř */
+        }
+
+        /* Styl pro tlačítka */
+        button {
+            width: 48%;
+            padding: 10px;
+            margin: 5px 1%;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #6dd5fa, #2980b9); /* Tlačítka s přechodem */
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lehké zvýšení */
+            transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animace */
+        }
+
+        /* Efekt při najetí myší na tlačítko */
+        button:hover {
+            transform: translateY(-2px); /* Mírné zvýšení */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Zvětšení stínu */
+        }
+
+        /* Styl pro výsledek */
+        h2 {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Kontejner s formulářem -->
+    <div class="container">
+        <h1>Převodník teplot</h1>
+        <label for="teplota">Zadej teplotu:</label>
+        <input type="number" id="teplota" placeholder="Zadej hodnotu">
+        <div>
+            <button onclick="prevod('C')">Z °C na °F</button>
+            <button onclick="prevod('F')">Z °F na °C</button>
+        </div>
+        <h2 id="vysledek"></h2>
+    </div>
+
+    <script>
+        // Funkce pro převod teploty
+        function prevod(typ) {
+            // Získání hodnoty ze vstupu a přímá konverze pomocí Number
+            const teplota = Number(document.getElementById('teplota').value);
+
+            // Proměnná pro uložení výsledku
+            let vysledek = '';
+
+            // Kontrola, zda hodnota není neplatné číslo
+            if (!teplota && teplota !== 0) {
+                vysledek = 'Prosím zadej platnou číselnou hodnotu!';
+            } else if (typ === 'C') {
+                vysledek = `${teplota} °C = ${(teplota * 9/5 + 32).toFixed(2)} °F`;
+            } else if (typ === 'F') {
+                vysledek = `${teplota} °F = ${((teplota - 32) * 5/9).toFixed(2)} °C`;
+            }
+
+            // Zobrazení výsledku na stránce
+            document.getElementById('vysledek').textContent = vysledek;
+        }
+    </script>
+</body>
+</html>
+
